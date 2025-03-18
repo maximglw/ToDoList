@@ -19,7 +19,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
             console.log("User logged in:", username);
 
             setTimeout(() => {
-                window.location.href = "../MainPage/Main.html"; // Zielseite anpassen
+                window.location.href = "../MainPage/index.html"; // Zielseite anpassen
             }, 1500);
         } else {
             messageElement.textContent = "Falscher Benutzername oder Passwort!";
