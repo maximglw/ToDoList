@@ -1,21 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>ToDo-List</title>
-</head>
-<div class="container">
-    <div class="todoApp">
-        <h2>To-Do List</h2>
-            <input placeholder="To-Do" type="text" id="input-box" class="input">
-            <button onclick="addTask()">Hinzufügen</button>
-        <ul id="list-container">
-
-        </ul>
-    </div>
-</div>
-<script src="script.js" async defer></script>
-</body>
+<html lang="de">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>LogIn</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="vid-container">
+                <div class="inner-container">
+                    <div class="box">
+                        <h1>Login</h1>
+                        <form id="loginForm">
+                            <input type="text" id="username" class="input" placeholder="Benutzername" required/>
+                            <input type="password" id="password" class="input" placeholder="Passwort" required/>
+                            <button type="submit">Login</button>
+                            <p id="message"></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="script.js" async defer></script>
+    </body>
 </html>
