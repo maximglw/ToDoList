@@ -1,0 +1,26 @@
+{
+  "Maxim": [
+    {
+      "text": "Test1",
+      "checked": false
+    },
+    {
+      "text": "Test2",
+      "checked": true
+    },
+    {
+      "text": "Kochen",
+      "checked": false
+    }
+  ],
+  "Julia": [
+    {
+      "text": "Test2",
+      "checked": true
+    },
+    {
+      "text": "KAhskasdka",
+      "checked": false
+    }
+  ]
+}

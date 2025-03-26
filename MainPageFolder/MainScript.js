@@ -2,66 +2,72 @@ const inputBox = document.getElementById("input-box");
 const listContainer = document.getElementById("list-container");
 let currentUser = localStorage.getItem("currentUser");
 
-// Prüfe, ob localStorage unterstützt wird
-if (typeof(Storage) !== "undefined") {
-    console.log("localStorage is supported.");
-    if (!currentUser) {
-        console.log("No user logged in, redirecting to login page...");
-        window.location.href = "../index.html"; // Zur Login-Seite umleiten
-    } else {
-        console.log("Current User from localStorage:", currentUser);
+if (!currentUser) {
+    window.location.href = "../index.html";
+}
+
+// Lade To-Dos vom Server
+async function loadTasks() {
+    try {
+        let response = await fetch(`http://localhost:3000/todos/${encodeURIComponent(currentUser)}`);
+        let tasks = await response.json();
+        listContainer.innerHTML = "";
+        tasks.forEach(task => {
+            let li = document.createElement("li");
+            li.textContent = task.text;
+            if (task.checked) {
+                li.classList.add("checked");
+            }
+            let span = document.createElement("span");
+            span.innerHTML = "\u00d7";
+            li.appendChild(span);
+            listContainer.appendChild(li);
+        });
+    } catch (error) {
+        console.error("Fehler beim Laden der To-Dos:", error);
     }
-} else {
-    alert("localStorage wird nicht unterstützt. Bitte aktiviere localStorage oder verwende einen anderen Browser.");
+}
+
+// Speichere To-Dos auf dem Server
+async function saveTasks() {
+    let tasks = [];
+    document.querySelectorAll("#list-container li").forEach(li => {
+        tasks.push({ text: li.textContent.slice(0, -1), checked: li.classList.contains("checked") });
+    });
+
+    try {
+        await fetch(`http://localhost:3000/todos/${currentUser}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ tasks })
+        });
+    } catch (error) {
+        console.error("Fehler beim Speichern der To-Dos:", error);
+    }
 }
 
 function addTask() {
     if (inputBox.value === '') {
         alert("Eingabe ist leer!");
-    } else {
-        let li = document.createElement("li");
-        li.innerHTML = inputBox.value;
-        listContainer.appendChild(li);
-        let span = document.createElement("span");
-        span.innerHTML = "\u00d7";
-        li.appendChild(span);
+        return;
     }
+    let li = document.createElement("li");
+    li.textContent = inputBox.value;
+    let span = document.createElement("span");
+    span.innerHTML = "\u00d7";
+    li.appendChild(span);
+    listContainer.appendChild(li);
     inputBox.value = "";
-    saveData();
+    saveTasks();
 }
 
 listContainer.addEventListener("click", function(e) {
     if (e.target.tagName === "LI") {
         e.target.classList.toggle("checked");
-        saveData();
     } else if (e.target.tagName === "SPAN") {
         e.target.parentElement.remove();
-        saveData();
     }
+    saveTasks();
 }, false);
 
-function saveData() {
-    let tasks = [];
-    document.querySelectorAll("#list-container li").forEach(li => {
-        tasks.push({ text: li.textContent.slice(0, -1), checked: li.classList.contains("checked") });
-    });
-    localStorage.setItem(`tasks_${currentUser}`, JSON.stringify(tasks));
-}
-
-function showTask() {
-    let tasks = JSON.parse(localStorage.getItem(`tasks_${currentUser}`)) || [];
-    listContainer.innerHTML = "";
-    tasks.forEach(task => {
-        let li = document.createElement("li");
-        li.innerHTML = task.text;
-        if (task.checked) {
-            li.classList.add("checked");
-        }
-        let span = document.createElement("span");
-        span.innerHTML = "\u00d7";
-        li.appendChild(span);
-        listContainer.appendChild(li);
-    });
-}
-
-showTask();
+loadTasks();
