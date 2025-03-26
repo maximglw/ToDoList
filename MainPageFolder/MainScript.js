@@ -9,7 +9,7 @@ if (!currentUser) {
 // Lade To-Dos vom Server
 async function loadTasks() {
     try {
-        let response = await fetch(`http://localhost:3000/todos/${encodeURIComponent(currentUser)}`);
+        let response = await fetch(`https://todolist-ntve.onrender.com/todos/${encodeURIComponent(currentUser)}`);
         let tasks = await response.json();
         listContainer.innerHTML = "";
         tasks.forEach(task => {
@@ -36,7 +36,7 @@ async function saveTasks() {
     });
 
     try {
-        await fetch(`http://localhost:3000/todos/${currentUser}`, {
+        await fetch(`https://todolist-ntve.onrender.com/todos/${currentUser}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ tasks })
