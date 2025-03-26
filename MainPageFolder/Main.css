@@ -1,23 +1,24 @@
-html, body {
-    overflow-x: hidden;
-    overflow-y: auto;
-    margin: 0;
-    height: 100%;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
-.background {   
-    filter: blur(10px);
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0px;
+  min-height: 100vh;
 }
 
 .input {
     display: flex;
     justify-content: center;
     width: 100%;
-    max-width: 305px;
-    height: 30px;
+    height: 50px;
+    outline: none;
     margin: 0px 0px 10px 0px;
     padding: 12px;
     border-radius: 12px;
@@ -41,59 +42,64 @@ html, body {
   }
 
   button {
+    width: 100%;
+    padding: 14px;
     align-items: center;
-    background: #fff;
     border: 0;
+    background-color: rgb(68, 67, 67);
     border-radius: 8px;
-    box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
     box-sizing: border-box;
-    color: #000;
+    color: #fff;;
     display: flex;
-    font-family: Phantomsans, sans-serif;
     font-size: 18px;
     justify-content: center;
     line-height: 1em;
     max-width: 100%;
     min-width: 140px;
-    padding: 3px;
     text-decoration: none;
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
     white-space: nowrap;
     cursor: pointer;
-    transition: all .3s;
-    padding-top: 20px;
-    padding-bottom: 20px
-  }
-  
+    transition: all 0.3s;  }
+
+  button:active,
   button:hover {
-    scale: 0.95
+    outline: 0;
   }
-  
+
+  button span {
+    background-color: rgb(5, 6, 45);
+    padding: 16px 24px;
+    border-radius: 6px;
+    width: 100%;
+    height: 100%;
+    transition: 300ms;
+  }
+
   button:active {
-    scale: 0.9
+    transform: scale(0.9);
   }
   .container {
+    display: flex;
+    justify-content: center;
+    align-items: start;
     width: 100%;
     min-height: 100vh;
-    background: linear-gradient(135deg, #153677, #4e085f);
+    background: -webkit-linear-gradient(90deg, #ee52ff,#0124b2);/* Chrome 10-25, Safari 5.1-6 */                          background: linear-gradient(90deg, #ee52ff,#0124b2);/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */                                             
     padding: 10px;
   }
 
   .todoApp {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    justify-content: center;
-    max-width: 330px;
-    padding: 20px;
     margin-top: 50px;
-    border-radius: 1rem;
-    background-color: #4158D0;
-    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
-    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
-    }
+    width: 95%;
+    padding: 30px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.01);
+    background-color: rgba(255, 192, 203, 0.5);    
+  }
 
   .todoApp h2 {
     color: #002765;
@@ -108,7 +114,7 @@ html, body {
     word-wrap: break-word;
     overflow-wrap: break-word; 
     font-size: 17px;
-    padding: 12px 45px 12px 5px;
+    padding: 12px 55px 12px 50px;
     user-select: none;
     cursor: pointer;
     position: relative;
@@ -124,7 +130,7 @@ html, body {
     background-size: cover;
     background-position: center;
     top: 8px;
-    left: -35px;
+    left: 10px;
   }
   
   ul li.checked {
@@ -139,16 +145,28 @@ html, body {
   ul li span {
     position: absolute;
     right: 0;
-    top: 5px;
-    width: 40px;
-    height: 40px;
+    top: 11px;
+    width: 20px;
+    height: 20px;
     font-size: 22px;
     color: #555;
     line-height: 40px;
     text-align: center;
     border-radius: 50%;
+    background-image: url('../images/trash.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    text-indent: -9999px; 
   }
 
-  ul li span:hover {
-    background: #edeef0;
+  @media (max-width: 660px) {
+    .todoApp {
+      padding: 20px;
+      margin-bottom: 100px; 
+    }
+
+    .input {
+      height: 50px;
+      outline: none;
+    }
   }
